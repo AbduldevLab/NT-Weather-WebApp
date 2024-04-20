@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { WiThermometer, WiHumidity, WiStrongWind, WiBarometer, WiSunrise, WiSunset, WiTime3 } from "react-icons/wi"; // Import additional icons
 
 const WeatherInfoComponent = (props) => {
-  const {name,value}=props;
+  const { name, value } = props;
+
   return (
     <InfoContainer>
-      <InfoIcon src={WeatherInfoIcons[name]} />
+      {getIcon(name)}
       <InfoLabel>
         {value}
         <div>{name}</div>
@@ -16,32 +18,48 @@ const WeatherInfoComponent = (props) => {
 
 export default WeatherInfoComponent;
 
-export const WeatherInfoIcons = {
-  "Feels like":
-    "https://www.freeiconspng.com/thumbs/temperature-icon-png/temperature-icon-png-1.png",
-  Humidity: "https://cdn-icons-png.flaticon.com/512/1582/1582886.png",
-  Wind:'https://cdn-icons-png.flaticon.com/512/172/172922.png',
-  pressure:'https://www.nicepng.com/png/detail/516-5168726_sea-level-pressure-icon.png',
+const getIcon = (name) => {
+  switch (name) {
+    case "Temperature":
+      return <WiThermometer />;
+    case "Humidity":
+      return <WiHumidity />;
+    case "Wind":
+      return <WiStrongWind />;
+    case "Pressure":
+      return <WiBarometer />;
+    case "Sunrise": // Add case for Sunrise
+      return <WiSunrise />;
+    case "Sunset": // Add case for Sunset
+      return <WiSunset />;
+    case "Timezone": // Add case for Timezone
+      return <WiTime3 />;
+    default:
+      return null;
+  }
 };
 
 const InfoContainer = styled.div`
   display: flex;
-  margin: 5px 10px;
-  flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  margin: auto auto; /* Adjusted margin for centering */
+  width: 100px; /* Fixed width */
+  height: 50px; /* Fixed height */
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: ${(props) => (props.darkMode ? "white" : "black")}; 
 `;
+
 const InfoLabel = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 14px;
-  margin: 15px;
+  font-size: 12px;
+  margin-left: 10px;
+  // color: ${(props) => (props.darkMode ? "white" : "black")}; 
   & div {
-    font-size: 16px;
+    font-size: 12px;
     text-transform: capitalize;
   }
-`;
-const InfoIcon = styled.img`
-  width: 45px;
-  height: 45px;
 `;

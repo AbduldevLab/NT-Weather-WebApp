@@ -4,7 +4,7 @@ import axios from "axios";
 
 const API_KEY = "e473088a1a9bc0f59b91f43a3a33c818";
 
-const CurrentLocation = ({ setCity, setFound, fetchWeather }) => {
+const CurrentLocation = ({ setCity, setFound, fetchWeather, darkMode }) => {
   const [location, setLocation] = useState({
     loaded: false,
     coordinates: { lat: "", lng: "" },
@@ -20,7 +20,7 @@ const CurrentLocation = ({ setCity, setFound, fetchWeather }) => {
     });
   };
 
-  const fetchWeatherViaLocation = async (e) => {
+  const fetchWeatherViaLocation = async () => {
     try {
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&appid=${API_KEY}`
@@ -49,7 +49,10 @@ const CurrentLocation = ({ setCity, setFound, fetchWeather }) => {
 
   return (
     <>
-      <StyledButton onClick={(e) => fetchWeatherViaLocation()}>
+      <StyledButton
+        darkMode={darkMode}
+        onClick={(e) => fetchWeatherViaLocation()}
+      >
         Locate me!
       </StyledButton>
     </>
@@ -63,14 +66,15 @@ const StyledButton = styled.button`
   font-size: 16px; /* Decreased font size */
   border-radius: 6px; /* Rounded corners */
   outline: none;
-  color: white;
-  background-color: #007bff; /* Blue button color */
+  color: ${(props) => (props.darkMode ? "white" : "black")}; /* Adjust text color based on dark mode */
+  background-color: ${(props) => (props.darkMode ? "#333" : "#007bff")}; /* Blue button color in light mode, dark gray in dark mode */
   cursor: pointer;
   width: 150px;
   border: none;
   transition: background-color 0.3s ease; /* Smooth transition */
 
   &:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: ${(props) =>
+      props.darkMode ? "#666" : "#0056b3"}; /* Darker blue on hover */
   }
 `;

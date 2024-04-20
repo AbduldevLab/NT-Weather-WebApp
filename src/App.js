@@ -56,6 +56,7 @@ function App() {
           BackClick={() => {
             setCity("");
           }}
+          darkMode={darkMode} // Pass darkMode to WeatherInfo component
         />
       ) : apierror && city.length > 0 ? (
         <Error404
@@ -90,31 +91,33 @@ function App() {
 }
 export default App;
 
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: auto 0 60%;
+  margin: 50px auto 10; /* Adjusted margin-top to move the container above the center */
   align-items: center;
   box-shadow: 0 3px 6px 0 #555;
-  padding: 30px 20px;
+  padding: 20px 20px;
   border-radius: 5px;
-  max-width: 800px; /* Set maximum width */
-  width: 90%; /* Set initial width */
-  background-color: ${(props) => (props.darkMode ? "#333" : "white")}; // Toggle background color for dark mode
-  color: ${(props) => (props.darkMode ? "white" : "rgb(0, 0, 0)")}; // Toggle text color for dark mode
+  max-width: 800px;
+  width: 90%;
+  background-color: ${(props) => (props.darkMode ? "#333" : "white")};
+  color: ${(props) => (props.darkMode ? "white" : "rgb(0, 0, 0)")};
 
   > div {
-    padding-bottom: 10px;
+    padding-bottom: 5px;
   }
 
   @media (min-width: 768px) {
-    width: 90%; /* Adjust width for tablets and larger devices */
+    width: 90%;
   }
 
   @media (min-width: 1024px) {
-    width: 70%; /* Adjust width for desktops */
+    width: 70%;
   }
 `;
+
 
 const Header = styled.div`
   display: flex;
@@ -138,7 +141,7 @@ const ToggleDarkModeButton = styled.button`
   color: inherit;
   font-size: 20px; /* Increase font size */
   outline: none;
-  margin-left: 10px; /* Add margin to separate from the label */
+  margin-left: 5px; /* Add margin to separate from the label */
 `;
 
 const MoonIcon = styled(IoMoon)`

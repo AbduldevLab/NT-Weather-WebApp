@@ -6,15 +6,16 @@ import MyImage from '../Images/weather-news.png'
 import "./style.css";
 
 const CityComponent = (props) => {
-  const { setCity, fetchWeather, city, loading } = props;
+  const { setCity, fetchWeather, city, loading, darkMode } = props;
 
   return (
     <>
       <WeatherLogo src={MyImage} alt="My Image"></WeatherLogo>
-      <CityLabel>
-        {loading ? `finding weather of ${city} ` : "Enter city name below"}
+      <CityLabel darkMode={darkMode}>
+        {loading ? `finding weather of ${city} ` : "Enter city/country name below"}
       </CityLabel>
       <SearchBox
+        darkMode={darkMode}
         onSubmit={(e) => {
           e.preventDefault();
           fetchWeather(city);
@@ -25,6 +26,7 @@ const CityComponent = (props) => {
           placeholder="Search"
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          style={{ color: darkMode ? "white" : "black" }} // Adjust input text color based on dark mode
         />
         <button type="submit">
           {!loading ? <BsSearch /> : <ImSpinner3 className="loading-icon" />}
@@ -43,7 +45,7 @@ const WeatherLogo = styled.img`
 `;
 
 const CityLabel = styled.span`
-  color: black;
+  color: ${(props) => (props.darkMode ? "white" : "black")}; // Adjust text color based on dark mode
   font-size: 18px;
   font-weight: bold;
 `;
@@ -52,7 +54,7 @@ const SearchBox = styled.form`
   display: flex;
   align-items: center;
   margin: 12px auto;
-  border: 2px solid #007bff; /* Change border color */
+  border: 2px solid ${(props) => (props.darkMode ? "#ccc" : "#007bff")}; /* Change border color based on dark mode */
   border-radius: 6px; /* Increase border radius for a softer look */
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -63,7 +65,7 @@ const SearchBox = styled.form`
     font-size: 16px;
     border: none;
     outline: none;
-    background-color: #f4f4f4; /* Light gray background color */
+    background-color: ${(props) => (props.darkMode ? "#444" : "#f4f4f4")}; /* Light gray background color */
     border-radius: 6px; /* Match border radius */
   }
   
@@ -71,14 +73,14 @@ const SearchBox = styled.form`
     padding: 12px 16px;
     font-size: 16px;
     color: white;
-    background-color: #007bff; /* Blue button color */
+    background-color: ${(props) => (props.darkMode ? "#333" : "#007bff")}; /* Blue button color */
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
     border-radius: 0 6px 6px 0; /* Match border radius */
     
     &:hover {
-      background-color: #0056b3; /* Darker blue on hover */
+      background-color: ${(props) => (props.darkMode ? "#666" : "#0056b3")}; /* Darker blue on hover */
     }
   }
 `;
