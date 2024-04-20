@@ -21,7 +21,7 @@ export const WeatherInfoIcons = {
     "https://www.freeiconspng.com/thumbs/temperature-icon-png/temperature-icon-png-1.png",
   Humidity: "https://cdn-icons-png.flaticon.com/512/1582/1582886.png",
   Wind:'https://cdn-icons-png.flaticon.com/512/172/172922.png',
-  pressure:'https://www.nicepng.com/png/detail/516-5168726_sea-level-pressure-icon.png'
+  pressure:'https://www.nicepng.com/png/detail/516-5168726_sea-level-pressure-icon.png',
 };
 
 const InfoContainer = styled.div`

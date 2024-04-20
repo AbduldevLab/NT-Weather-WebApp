@@ -8,7 +8,6 @@
 
 - Accesses Open Weather API for weather data
 - Modern  UI/UX
-- sitemaping
 - Weather icons
 - React icons
 - HTTP location request

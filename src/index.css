@@ -2,6 +2,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50rem;
-  background:rgb(65, 241, 159);
+  height: 100vh; /* Set height to 100% of viewport height */
+  margin: 0; /* Remove default body margin */
+  background-image: url(./Images/view-3d-cloud.jpg); /* Replace 'your-image-url.jpg' with the path to your image */
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents background image from repeating */
+}
+@media only screen and (max-width: 200px) {
+
 }

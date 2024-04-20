@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-const API_KEY = "13ec29720fa55c2c114c53a3a9694387";
+
+const API_KEY = "e473088a1a9bc0f59b91f43a3a33c818";
+
 const CurrentLocation = ({ setCity, setFound, fetchWeather }) => {
   const [location, setLocation] = useState({
     loaded: false,
     coordinates: { lat: "", lng: "" },
   });
+
   const onSuccess = (location) => {
     setLocation({
       loaded: true,
@@ -46,22 +49,28 @@ const CurrentLocation = ({ setCity, setFound, fetchWeather }) => {
 
   return (
     <>
-      <Button onClick={(e) => fetchWeatherViaLocation()}>
-        Get Device Location
-      </Button>
+      <StyledButton onClick={(e) => fetchWeatherViaLocation()}>
+        Locate me!
+      </StyledButton>
     </>
   );
 };
 
 export default CurrentLocation;
 
-const Button = styled.button`
-  padding: 8px;
-  font-size: 18px;
-  border-radius: 5px;
+const StyledButton = styled.button`
+  padding: 12px 20px; /* Increased padding */
+  font-size: 16px; /* Decreased font size */
+  border-radius: 6px; /* Rounded corners */
   outline: none;
   color: white;
-  background-color: black;
+  background-color: #007bff; /* Blue button color */
   cursor: pointer;
-  width: 250px;
+  width: 150px;
+  border: none;
+  transition: background-color 0.3s ease; /* Smooth transition */
+
+  &:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
 `;

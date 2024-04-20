@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { BsSearch } from "react-icons/bs";
 import { ImSpinner3 } from "react-icons/im";
+import MyImage from '../Images/weather-news.png'
 import "./style.css";
 
 const CityComponent = (props) => {
@@ -9,9 +10,9 @@ const CityComponent = (props) => {
 
   return (
     <>
-      <WeatherLogo src="https://www.freeiconspng.com/thumbs/weather-icon-png/weather-icon-png-25.png"></WeatherLogo>
+      <WeatherLogo src={MyImage} alt="My Image"></WeatherLogo>
       <CityLabel>
-        {loading ? `finding weather of ${city} ` : "Find Weather Of Your City"}
+        {loading ? `finding weather of ${city} ` : "Enter city name below"}
       </CityLabel>
       <SearchBox
         onSubmit={(e) => {
@@ -21,7 +22,7 @@ const CityComponent = (props) => {
       >
         <input
           type="text"
-          placeholder="city"
+          placeholder="Search"
           value={city}
           onChange={(e) => setCity(e.target.value)}
         />
@@ -49,26 +50,35 @@ const CityLabel = styled.span`
 
 const SearchBox = styled.form`
   display: flex;
-  flex-direction: row;
-  color: black;
-  font-size: 20px;
-  font-weight: bold;
+  align-items: center;
   margin: 12px auto;
-  border: black solid 2px;
-  border-radius: 2px;
+  border: 2px solid #5c5c5c; /* Change border color */
+  border-radius: 6px; /* Increase border radius for a softer look */
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
   & input {
-    padding: 10px;
-    font-size: 14px;
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
     border: none;
     outline: none;
-    font-weight: bold;
+    background-color: #f4f4f4; /* Light gray background color */
+    border-radius: 6px; /* Match border radius */
   }
+  
   & button {
-    padding: 10px;
-    font-size: 18px;
-    border: none;
+    padding: 12px 16px;
+    font-size: 16px;
     color: white;
-    background-color: black;
+    background-color: #007bff; /* Blue button color */
+    border: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 0 6px 6px 0; /* Match border radius */
+    
+    &:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
   }
 `;

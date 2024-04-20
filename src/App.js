@@ -6,7 +6,7 @@ import CurrentLocation from "./components/CurrentLocation";
 import Error404 from "./components/Error404";
 import WeatherInfo from "./components/WeatherInfo";
 
-const API_KEY = "13ec29720fa55c2c114c53a3a9694387";
+const API_KEY = "e473088a1a9bc0f59b91f43a3a33c818";
 
 function App() {
   const [city, setCity] = useState("");
@@ -35,7 +35,7 @@ function App() {
 
   return (
     <Container>
-      <AppLabel>Weather App</AppLabel>
+      <AppLabel>Northern Trust Weather App</AppLabel>
       {weather && found ? (
         <WeatherInfo
           weather={weather}
@@ -90,8 +90,8 @@ const Container = styled.div`
 `;
 
 const AppLabel = styled.span`
-  color: rgb(65, 168, 241);
+  color: rgb(0, 0, 0);
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: -22px;
+  margin-bottom: -10px;
 `;
