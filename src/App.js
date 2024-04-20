@@ -96,7 +96,7 @@ const Container = styled.div`
   margin: auto 0 60%;
   align-items: center;
   box-shadow: 0 3px 6px 0 #555;
-  padding: 40px 20px;
+  padding: 30px 20px;
   border-radius: 5px;
   max-width: 800px; /* Set maximum width */
   width: 90%; /* Set initial width */
