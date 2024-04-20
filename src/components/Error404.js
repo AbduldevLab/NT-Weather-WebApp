@@ -3,7 +3,14 @@ import styled from "styled-components";
 import { FaExclamationCircle } from "react-icons/fa";
 
 const Error404 = (props) => {
-  const {  BackClick } = props;
+  const { setApierror, BackClick } = props;
+
+  // Function to handle going back to the dashboard and setting apiError to false
+  const handleBackToDashboard = () => {
+    setApierror(false);
+    BackClick();
+  };
+
   return (
     <Container>
       <MessageContainer>
@@ -11,7 +18,7 @@ const Error404 = (props) => {
           <NoResultIcon />
         </IconContainer>
         <ErrorMessage>Location not found!</ErrorMessage>
-        <BackToDashboardButton onClick={BackClick}>
+        <BackToDashboardButton onClick={handleBackToDashboard}>
           Back to Dashboard
         </BackToDashboardButton>
       </MessageContainer>

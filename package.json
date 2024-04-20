@@ -1,6 +1,6 @@
 {
   "homepage": "https://abdulhaouit.github.io/NT-Weather-WebApp/",
-  "name": "weather",
+  "name": "weatherapp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
