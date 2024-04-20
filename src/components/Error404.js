@@ -10,7 +10,7 @@ const Error404 = (props) => {
         <IconContainer>
           <NoResultIcon />
         </IconContainer>
-        <ErrorMessage>No results found for the city!</ErrorMessage>
+        <ErrorMessage>Location not found!</ErrorMessage>
         <BackToDashboardButton onClick={BackClick}>
           Back to Dashboard
         </BackToDashboardButton>

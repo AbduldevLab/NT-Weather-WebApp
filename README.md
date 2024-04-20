@@ -37,9 +37,9 @@
 
 ---
 
-Visit the deployed website, track live work progress.
+Visit the deployed website.
 
-s
+https://abdulhaouit.github.io/NT-Weather-WebApp/
 
 ### Copyright and License:
 

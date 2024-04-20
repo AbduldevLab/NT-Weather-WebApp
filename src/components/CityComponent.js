@@ -52,7 +52,7 @@ const SearchBox = styled.form`
   display: flex;
   align-items: center;
   margin: 12px auto;
-  border: 2px solid #5c5c5c; /* Change border color */
+  border: 2px solid #007bff; /* Change border color */
   border-radius: 6px; /* Increase border radius for a softer look */
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
