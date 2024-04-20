@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
+import { IoMoon, IoSunny } from "react-icons/io5"; // Import icons
 import CityComponent from "./components/CityComponent";
 import CurrentLocation from "./components/CurrentLocation";
 import Error404 from "./components/Error404";
@@ -14,6 +15,11 @@ function App() {
   const [found, setFound] = useState(false);
   const [apierror, setApierror] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [darkMode, setDarkMode] = useState(false); // State for dark mode
+
+  const toggleDarkMode = () => {
+    setDarkMode((prevMode) => !prevMode);
+  };
 
   const fetchWeather = async (CurrCity) => {
     if (CurrCity) {
@@ -34,8 +40,15 @@ function App() {
   };
 
   return (
-    <Container>
-      <AppLabel>Northern Trust Weather App</AppLabel>
+    <Container darkMode={darkMode}>
+      <Header>
+        <AppLabel darkMode={darkMode}>
+          Northern Trust forecast
+          <ToggleDarkModeButton onClick={toggleDarkMode}>
+            {darkMode ? <SunIcon /> : <MoonIcon />}
+          </ToggleDarkModeButton>
+        </AppLabel>
+      </Header>
       {weather && found ? (
         <WeatherInfo
           weather={weather}
@@ -45,9 +58,12 @@ function App() {
           }}
         />
       ) : apierror && city.length > 0 ? (
-        <Error404 setApierror={setApierror} BackClick={() => {
-          setCity("");
-        }}/>
+        <Error404
+          setApierror={setApierror}
+          BackClick={() => {
+            setCity("");
+          }}
+        />
       ) : (
         <>
           <CityComponent
@@ -58,12 +74,14 @@ function App() {
             fetchWeather={fetchWeather}
             weather={weather}
             loading={loading}
+            darkMode={darkMode}
           />
-          <div>or</div>
+          <Alternative darkMode={darkMode}>or</Alternative>
           <CurrentLocation
             setCity={setCity}
             setFound={setFound}
             fetchWeather={fetchWeather}
+            darkMode={darkMode}
           />
         </>
       )}
@@ -75,23 +93,64 @@ export default App;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin: auto 0 60%;
   align-items: center;
   box-shadow: 0 3px 6px 0 #555;
   padding: 40px 20px;
-  border-radius: 4px;
-  width: 380px;
-  background-color: white;
-  font-family: "DM Sans", sans-serif;
+  border-radius: 5px;
+  max-width: 800px; /* Set maximum width */
+  width: 90%; /* Set initial width */
+  background-color: ${(props) => (props.darkMode ? "#333" : "white")}; // Toggle background color for dark mode
+  color: ${(props) => (props.darkMode ? "white" : "rgb(0, 0, 0)")}; // Toggle text color for dark mode
 
   > div {
     padding-bottom: 10px;
   }
+
+  @media (min-width: 768px) {
+    width: 90%; /* Adjust width for tablets and larger devices */
+  }
+
+  @media (min-width: 1024px) {
+    width: 70%; /* Adjust width for desktops */
+  }
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 `;
 
 const AppLabel = styled.span`
-  color: rgb(0, 0, 0);
-  font-size: 18px;
+  font-size: 24px; /* Increased font size */
   font-weight: bold;
-  margin-bottom: -10px;
+  color: ${(props) => (props.darkMode ? "white" : "black")}; // Adjust text color based on dark mode
+  display: flex;
+  align-items: center;
 `;
+
+const ToggleDarkModeButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font-size: 20px; /* Increase font size */
+  outline: none;
+  margin-left: 10px; /* Add margin to separate from the label */
+`;
+
+const MoonIcon = styled(IoMoon)`
+  color: black;
+`;
+
+const SunIcon = styled(IoSunny)`
+  color: orange;
+`;
+
+const Alternative = styled.div`
+  color: ${(props) => (props.darkMode ? "white" : "black")}; // Adjust text color based on dark mode
+  margin-bottom: 10px;
+`;
+
