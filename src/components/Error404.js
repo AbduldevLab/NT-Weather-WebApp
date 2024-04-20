@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FaExclamationCircle } from "react-icons/fa";
 
 const Error404 = (props) => {
-  const { setApierror, BackClick } = props;
+  const {  BackClick } = props;
   return (
     <Container>
       <MessageContainer>
