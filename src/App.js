@@ -64,6 +64,7 @@ function App() {
           BackClick={() => {
             setCity("");
           }}
+          darkMode={darkMode}
         />
       ) : (
         <>

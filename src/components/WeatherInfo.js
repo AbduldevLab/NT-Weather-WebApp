@@ -97,6 +97,7 @@ const WeatherInfo = ({ weather, setFound, BackClick, darkMode }) => {
 
 export default WeatherInfo;
 
+//reduced margin bottom for most divs in order to facilitate mobile devices, more info == bigger container
 const Container = styled.div`
   display: flex;
   flex-direction: column;

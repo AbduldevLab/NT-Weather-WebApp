@@ -18,6 +18,7 @@ const Error404 = (props) => {
           <NoResultIcon />
         </IconContainer>
         <ErrorMessage>Location not found!</ErrorMessage>
+        {/* Ensure darkMode prop is passed correctly */}
         <BackToDashboardButton darkMode={darkMode} onClick={handleBackToDashboard}>
           Back to Dashboard
         </BackToDashboardButton>
@@ -47,20 +48,21 @@ const ErrorMessage = styled.div`
 `;
 
 const BackToDashboardButton = styled.button`
-  padding: 10px 20px; /* Adjust padding */
-  font-size: 16px; /* Adjust font size */
+  padding: 10px 20px;
+  font-size: 16px;
   border: none;
-  border-radius: 6px;
+  border-radius: 5px;
   outline: none;
-  background-color: transparent;
+  background-color: ${(props) => (props.darkMode ? "#333" : "#007bff")}; /* Conditional background color */
   color: inherit;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth transition */
+  transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${(props) => (props.darkMode ? "#666" : "#0056b3")};
+    background-color: #666; /* Hardcoded dark mode hover background color */
   }
 `;
+
 
 const NoResultIcon = styled(FaExclamationCircle)`
   color: red;
