@@ -7,7 +7,6 @@ import CurrentLocation from "./components/CurrentLocation";
 import Error404 from "./components/Error404";
 import WeatherInfo from "./components/WeatherInfo";
 
-const API_KEY = "e473088a1a9bc0f59b91f43a3a33c818";
 
 function App() {
   const [city, setCity] = useState("");
@@ -32,10 +31,10 @@ function App() {
     setLoading(true);
     try {
       const weatherResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${CurrCity}&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${CurrCity}&appid=${process.env.REACT_APP_API_KEY}`
       );
       const forecastResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${CurrCity}&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${CurrCity}&appid=${process.env.REACT_APP_API_KEY}`
       );
       setWeather(weatherResponse.data);
       //console.log(weatherResponse.data);
