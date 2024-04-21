@@ -159,7 +159,7 @@ const MeasurementButton = styled.button`
   margin-top: 20px;
   padding: 10px 20px;
   border: none;
-  background-color: ${(props) => (props.darkMode ? "#333" : "#007bff")};
+  background-color: transparent;
   color: inherit;
   font-size: 16px;
   border-radius: 5px;

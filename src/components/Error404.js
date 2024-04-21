@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FaExclamationCircle } from "react-icons/fa";
 
 const Error404 = (props) => {
-  const { setApierror, BackClick } = props;
+  const { setApierror, BackClick, darkMode } = props;
 
   // Function to handle going back to the dashboard and setting apiError to false
   const handleBackToDashboard = () => {
@@ -18,7 +18,7 @@ const Error404 = (props) => {
           <NoResultIcon />
         </IconContainer>
         <ErrorMessage>Location not found!</ErrorMessage>
-        <BackToDashboardButton onClick={handleBackToDashboard}>
+        <BackToDashboardButton darkMode={darkMode} onClick={handleBackToDashboard}>
           Back to Dashboard
         </BackToDashboardButton>
       </MessageContainer>
@@ -52,13 +52,13 @@ const BackToDashboardButton = styled.button`
   border: none;
   border-radius: 6px;
   outline: none;
-  color: white;
-  background-color: #007bff; /* Blue button color */
+  background-color: transparent;
+  color: inherit;
   cursor: pointer;
   transition: background-color 0.3s ease; /* Smooth transition */
 
   &:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: ${(props) => (props.darkMode ? "#666" : "#0056b3")};
   }
 `;
 

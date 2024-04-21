@@ -57,7 +57,7 @@ const InfoLabel = styled.div`
   flex-direction: column;
   font-size: 12px;
   margin-left: 10px;
-  // color: ${(props) => (props.darkMode ? "white" : "black")}; 
+  color: ${(props) => (props.darkMode ? "white" : "black")}; 
   & div {
     font-size: 12px;
     text-transform: capitalize;
