@@ -1,10 +1,9 @@
-import React, { useState } from "react";// Import useState hook
-import styled from "styled-components";// Import styled-components
-import WeatherInfoComponent from "./WeatherInfoComponent";// Import WeatherInfoComponent
-import { ImLocation2 } from "react-icons/im";// Import location icon
-import { FiChevronLeft } from "react-icons/fi";// Import back icon
+import React, { useState } from "react";
+import styled from "styled-components";
+import WeatherInfoComponent from "./WeatherInfoComponent";
+import { ImLocation2 } from "react-icons/im";
+import { FiChevronLeft } from "react-icons/fi";
 
-// Import weather icons
 import {
   WiDaySunny,
   WiCloudy,
@@ -20,22 +19,18 @@ import {
   WiNightFog
 } from "react-icons/wi";
 
-// WeatherInfo component
 const WeatherInfo = ({ weather, setFound, BackClick, darkMode }) => {
-  const [isCelsius, setIsCelsius] = useState(true);// Create a state variable isCelsius and set it to true
+  const [isCelsius, setIsCelsius] = useState(true);
 
-  // Function to toggle the temperature measurement
   const toggleMeasurement = () => {
     setIsCelsius(!isCelsius);
   };
 
-  // Function to convert temperature
   const convertTemperature = (temp) => {
-    const temperature = isCelsius ? Math.floor(temp - 273) : Math.floor((temp - 273) * (9 / 5) + 32);// Convert temperature based on the measurement
+    const temperature = isCelsius ? Math.floor(temp - 273) : Math.floor((temp - 273) * (9 / 5) + 32);
     return `${temperature}°${isCelsius ? "C" : "F"}`;
   };
 
-  // Function to get weather icon
   const getWeatherIcon = (icon) => {
     const weatherIcons = {
       "01d": <WiDaySunny />,
@@ -58,26 +53,24 @@ const WeatherInfo = ({ weather, setFound, BackClick, darkMode }) => {
       "50n": <WiNightFog />,
     };
 
-    return weatherIcons[icon] || null;// Return the weather icon based on the icon code or null
+    return weatherIcons[icon] || null;
   };
 
   return (
-    // Render the weather information
     <Container>
-      <Back onClick={() => {// Add onClick event to the Back button
+      <Back onClick={() => {
         setFound(false);
         BackClick();
       }}>
         <ArrowIcon />
       </Back>
-      {weather && (// Check if weather data is available
+      {weather && (
         <>
           <WeatherCondition>
-            {/* Display weather information*/}
             <WeatherIcon>
               {getWeatherIcon(weather.weather[0].icon)}
             </WeatherIcon>
-            <Temperature>{convertTemperature(weather.main.temp)}</Temperature>()
+            <Temperature>{convertTemperature(weather.main.temp)}</Temperature>
             <Condition>{weather.weather[0].description}</Condition>
             <Location>
               <ImLocation2 /> {`${weather.name}, ${weather.sys.country}`}
@@ -104,11 +97,12 @@ const WeatherInfo = ({ weather, setFound, BackClick, darkMode }) => {
 
 export default WeatherInfo;
 
-// Styled components
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
+  overflow: auto;
 `;
 
 const Back = styled.span`
@@ -124,6 +118,7 @@ const WeatherCondition = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 10px; /* Reduce margin bottom */
 `;
 
 const WeatherIcon = styled.div`
@@ -137,6 +132,7 @@ const Temperature = styled.div`
 
 const Condition = styled.span`
   font-size: 18px;
+  margin-bottom: 5px; /* Reduce margin bottom */
 `;
 
 const Location = styled.span`
@@ -146,20 +142,21 @@ const Location = styled.span`
 const WeatherInfoContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin-top: 30px;
-  padding: 20px;
+  gap: 10px; /* Reduce gap */
+  padding: 10px; /* Reduce padding */
   max-width: 300px;
   border-radius: 10px;
   background-color: #f0f0f0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px; /* Reduce margin bottom */
+  overflow: auto;
 `;
 
 const MeasurementButton = styled.button`
   margin-top: 20px;
   padding: 10px 20px;
   border: none;
-  background-color: transparent;
+  background-color: ${(props) => (props.darkMode ? "#333" : "#007bff")};
   color: inherit;
   font-size: 16px;
   border-radius: 5px;
