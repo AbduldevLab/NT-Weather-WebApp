@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { FaMapMarkerAlt } from "react-icons/fa"; // Import map marker icon
+
+
 
 const API_KEY = "e473088a1a9bc0f59b91f43a3a33c818";
 
@@ -53,7 +56,8 @@ const CurrentLocation = ({ setCity, setFound, fetchWeather, darkMode }) => {
         darkMode={darkMode}
         onClick={(e) => fetchWeatherViaLocation()}
       >
-        Locate me!
+        <Icon darkMode={darkMode} /> 
+        Locate me! 
       </StyledButton>
     </>
   );
@@ -77,4 +81,7 @@ const StyledButton = styled.button`
     background-color: ${(props) =>
       props.darkMode ? "#666" : "#0056b3"}; /* Darker blue on hover */
   }
+`;
+const Icon = styled(FaMapMarkerAlt)`
+  margin-right: 5px; /* Adjust margin between icon and text */
 `;

@@ -1,8 +1,9 @@
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import WeatherInfoComponent from "./WeatherInfoComponent";
 import { ImLocation2 } from "react-icons/im";
-import { FiChevronLeft } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 import {
   WiDaySunny,
@@ -19,8 +20,9 @@ import {
   WiNightFog
 } from "react-icons/wi";
 
-const WeatherInfo = ({ weather, setFound, BackClick, darkMode }) => {
+const WeatherInfo = ({ weather, forecast, setFound, BackClick, darkMode }) => {
   const [isCelsius, setIsCelsius] = useState(true);
+  const [selectedDayIndex, setSelectedDayIndex] = useState(0);
 
   const toggleMeasurement = () => {
     setIsCelsius(!isCelsius);
@@ -56,48 +58,74 @@ const WeatherInfo = ({ weather, setFound, BackClick, darkMode }) => {
     return weatherIcons[icon] || null;
   };
 
+
+
+  const handleNextDay = () => {
+    setSelectedDayIndex((prevIndex) => Math.min(prevIndex + 1, forecast.length - 1));
+  };
+
+  const handlePreviousDay = () => {
+    setSelectedDayIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
+  
+  const displayDateTime = (dateTime) => {
+    const date = new Date(dateTime);
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const dayOfWeek = days[date.getDay()];
+    const formattedDate = `${dayOfWeek} ${date.toLocaleTimeString()}`;
+    return formattedDate;
+  };
+
   return (
     <Container>
-      <Back onClick={() => {
-        setFound(false);
-        BackClick();
-      }}>
-        <ArrowIcon />
-      </Back>
-      {weather && (
-        <>
+      <Navigation>
+        <BackIcon onClick={handlePreviousDay} />
+        <FrontIcon onClick={handleNextDay} />
+      </Navigation>
+      {forecast.length > 0 && (
+        <WeatherContent>
           <WeatherCondition>
             <WeatherIcon>
-              {getWeatherIcon(weather.weather[0].icon)}
+              {getWeatherIcon(forecast[selectedDayIndex].weather[0].icon)}
             </WeatherIcon>
-            <Temperature>{convertTemperature(weather.main.temp)}</Temperature>
-            <Condition>{weather.weather[0].description}</Condition>
+            <Temperature>{convertTemperature(forecast[selectedDayIndex].main.temp)}</Temperature>
+            {/* <Day>{forecast[selectedDayIndex].dt_txt}</Day> */}
+            <Day>{displayDateTime(forecast[selectedDayIndex].dt_txt)}</Day>
+            <Condition>{forecast[selectedDayIndex].weather[0].description}</Condition>
             <Location>
               <ImLocation2 /> {`${weather.name}, ${weather.sys.country}`}
             </Location>
           </WeatherCondition>
           <WeatherInfoContainer>
-            <WeatherInfoComponent name="Feels Like" value={convertTemperature(weather.main.feels_like)} />
-            <WeatherInfoComponent name="Humidity" value={`${weather.main.humidity}%`} />
-            <WeatherInfoComponent name="Wind Speed" value={`${weather.wind.speed}`} />
-            <WeatherInfoComponent name="Pressure" value={`${weather.main.pressure}`} />
+            <WeatherInfoComponent name="Feels Like" value={convertTemperature(forecast[selectedDayIndex].main.feels_like)} />
+            <WeatherInfoComponent name="Humidity" value={`${forecast[selectedDayIndex].main.humidity}%`} />
+            <WeatherInfoComponent name="Wind Speed" value={`${forecast[selectedDayIndex].wind.speed}`} />
+            <WeatherInfoComponent name="Pressure" value={`${forecast[selectedDayIndex].main.pressure}`} />
             <WeatherInfoComponent name="Sunrise" value={`${new Date((weather.sys.sunrise + weather.timezone) * 1000).toLocaleTimeString()}`} />
             <WeatherInfoComponent name="Sunset" value={`${new Date((weather.sys.sunset + weather.timezone) * 1000).toLocaleTimeString()}`} />
             <WeatherInfoComponent name="Timezone" value={`${weather.timezone}`} />
             <WeatherInfoComponent name="Last Update" value={`${new Date(weather.dt * 1000).toLocaleString()}`} />
+            {/* Add more WeatherInfoComponent here if needed */}
           </WeatherInfoContainer>
-        </>
+        </WeatherContent>
       )}
-      <MeasurementButton darkMode={darkMode} onClick={toggleMeasurement}>
-        {isCelsius ? "Switch to Fahrenheit" : "Switch to Celsius"}
-      </MeasurementButton>
+      <ButtonContainer>
+        <HomeButton darkMode={darkMode} onClick={() => {
+          setFound(false);
+          BackClick();
+        }}>
+          Home
+        </HomeButton>
+        <MeasurementButton darkMode={darkMode} onClick={toggleMeasurement}>
+          {isCelsius ? "Switch to Fahrenheit" : "Switch to Celsius"}
+        </MeasurementButton>
+      </ButtonContainer>
     </Container>
   );
 };
 
 export default WeatherInfo;
 
-//reduced margin bottom for most divs in order to facilitate mobile devices, more info == bigger container
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -106,20 +134,34 @@ const Container = styled.div`
   overflow: auto;
 `;
 
-const Back = styled.span`
+const Navigation = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const BackIcon = styled(FiChevronLeft)`
   font-size: 25px;
   cursor: pointer;
 `;
 
-const ArrowIcon = styled(FiChevronLeft)`
-  color: inherit;
+const FrontIcon = styled(FiChevronRight)`
+  font-size: 25px;
+  cursor: pointer;
+`;
+
+const WeatherContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 `;
 
 const WeatherCondition = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 10px; /* Reduce margin bottom */
+  margin-bottom: 5px;
 `;
 
 const WeatherIcon = styled.div`
@@ -131,31 +173,59 @@ const Temperature = styled.div`
   font-weight: bold;
 `;
 
+const Day = styled.div`
+  font-size: 20px;
+  margin-bottom: 2px;
+`;
+
 const Condition = styled.span`
-  font-size: 18px;
-  margin-bottom: 5px; /* Reduce margin bottom */
+  font-size: 16px;
+  margin-bottom: 2px;
 `;
 
 const Location = styled.span`
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 const WeatherInfoContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px; /* Reduce gap */
-  padding: 10px; /* Reduce padding */
+  gap: 5px;
+  padding: 5px;
   max-width: 300px;
   border-radius: 10px;
   background-color: #f0f0f0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px; /* Reduce margin bottom */
+  margin-bottom: 5px;
   overflow: auto;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+`;
+
 const MeasurementButton = styled.button`
-  margin-top: 20px;
-  padding: 10px 20px;
+  width: 100px;
+  height: 40px;
+  border: none;
+  background-color: ${(props) => (props.darkMode ? "#333" : "#007bff")};
+  color: inherit;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: ${(props) => (props.darkMode ? "#666" : "#0056b3")};
+  }
+`;
+
+const HomeButton = styled.button`
+  width: 100px;
+  height: 40px;
   border: none;
   background-color: ${(props) => (props.darkMode ? "#333" : "#007bff")};
   color: inherit;

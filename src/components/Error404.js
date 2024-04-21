@@ -17,7 +17,12 @@ const Error404 = (props) => {
         <IconContainer>
           <NoResultIcon />
         </IconContainer>
-        <ErrorMessage>Location not found!</ErrorMessage>
+        <ErrorMessage>Location not found! </ErrorMessage>
+        <FormatMessage>
+          Format: City, Country Code
+          <br />
+          (Not case sensitive)
+        </FormatMessage>
         {/* Ensure darkMode prop is passed correctly */}
         <BackToDashboardButton darkMode={darkMode} onClick={handleBackToDashboard}>
           Back to Dashboard
@@ -43,8 +48,15 @@ const IconContainer = styled.div`
 `;
 
 const ErrorMessage = styled.div`
-  margin-bottom: 20px; /* Add margin between error message and button */
+  margin-bottom: 10px; /* Add margin between error message and button */
   color: red;
+  font-size: 20px;
+`;
+const FormatMessage = styled.div`
+  padding-bottom: 10px; /* Add padding to bottom */
+  font-size: 12px;
+  color: red; /* Adjusted color */
+  text-align: center; /* Center align text */
 `;
 
 const BackToDashboardButton = styled.button`

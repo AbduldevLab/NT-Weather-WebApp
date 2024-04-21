@@ -12,6 +12,7 @@ const API_KEY = "e473088a1a9bc0f59b91f43a3a33c818";
 function App() {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState("");
+  const [forecast, setForecast] = useState("");
   const [found, setFound] = useState(false);
   const [apierror, setApierror] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -25,10 +26,16 @@ function App() {
     if (CurrCity) {
       setLoading(true);
       try {
-        const response = await axios.get(
+        const weatherResponse = await axios.get(
           `https://api.openweathermap.org/data/2.5/weather?q=${CurrCity}&appid=${API_KEY}`
         );
-        setWeather(response.data);
+        const forecastResponse = await axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?q=${CurrCity}&appid=${API_KEY}`
+        );
+        setWeather(weatherResponse.data);
+        console.log(weatherResponse.data);
+        setForecast(forecastResponse.data.list);
+        console.log(forecastResponse.data);
         setFound(true);
         setApierror(false);
       } catch {
@@ -52,6 +59,7 @@ function App() {
       {weather && found ? (
         <WeatherInfo
           weather={weather}
+          forecast={forecast}
           setFound={setFound}
           BackClick={() => {
             setCity("");

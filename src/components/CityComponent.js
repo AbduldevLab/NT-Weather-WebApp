@@ -12,7 +12,7 @@ const CityComponent = (props) => {
     <>
       <WeatherLogo src={MyImage} alt="My Image"></WeatherLogo>
       <CityLabel darkMode={darkMode}>
-        {loading ? `finding weather of ${city} ` : "Enter city/country name below"}
+        {loading ? `finding weather of ${city} ` : "Enter city/country below"}
       </CityLabel>
       <SearchBox
         darkMode={darkMode}
