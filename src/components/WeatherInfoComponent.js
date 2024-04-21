@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { WiThermometer, WiHumidity, WiStrongWind, WiBarometer, WiSunrise, WiSunset, WiTime3 } from "react-icons/wi"; // Import additional icons
+import { WiThermometer, WiHumidity, WiStrongWind, WiBarometer, WiSunrise, WiSunset, WiTime3 } from "react-icons/wi"; // Importing icons
 
-const WeatherInfoComponent = (props) => {
+const WeatherInfoComponent = (props) => {// WeatherInfo component with props.
   const { name, value } = props;
 
+  // Return the WeatherInfo component with the icon, value, and name.
   return (
     <InfoContainer>
       {getIcon(name)}
@@ -16,10 +17,10 @@ const WeatherInfoComponent = (props) => {
   );
 };
 
-export default WeatherInfoComponent;
+export default WeatherInfoComponent;// Export the WeatherInfo component for use in other files.
 
-const getIcon = (name) => {
-  switch (name) {
+const getIcon = (name) => {// Function to return the icon based on the name.
+  switch (name) {// Switch statement to return the icon based on the name.
     case "Temperature":
       return <WiThermometer />;
     case "Humidity":
@@ -35,10 +36,11 @@ const getIcon = (name) => {
     case "Timezone": // Add case for Timezone
       return <WiTime3 />;
     default:
-      return null;
+      return null;// Return null (empty) if the name does not match any of the cases.
   }
 };
 
+// Styled components for the infoconatiner component that will hold the different metrics.
 const InfoContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -52,6 +54,7 @@ const InfoContainer = styled.div`
   color: ${(props) => (props.darkMode ? "white" : "black")}; 
 `;
 
+// Styled components for the info labels for the metrics.
 const InfoLabel = styled.div`
   display: flex;
   flex-direction: column;

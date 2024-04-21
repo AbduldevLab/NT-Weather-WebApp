@@ -31,6 +31,7 @@
 6. RemixIcon/flaticon
 7. React-icons
 8. Jest
+9. JSX
 
 ### Live domain link:
 

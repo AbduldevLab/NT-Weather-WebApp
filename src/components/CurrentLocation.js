@@ -3,53 +3,50 @@ import styled from "styled-components";
 import axios from "axios";
 import { FaMapMarkerAlt } from "react-icons/fa"; // Import map marker icon
 
-
-
-const API_KEY = "e473088a1a9bc0f59b91f43a3a33c818";
-
-const CurrentLocation = ({ setCity, setFound, fetchWeather, darkMode }) => {
-  const [location, setLocation] = useState({
-    loaded: false,
-    coordinates: { lat: "", lng: "" },
+const CurrentLocation = ({ setCity, setFound, fetchWeather, darkMode }) => {// Add setCity, setFound, fetchWeather, and darkMode as parameters
+  const [location, setLocation] = useState({// Set location state
+    loaded: false,// Set loaded to false in order to load the location data from the browser geolocation API when the component mounts.
+    coordinates: { lat: "", lng: "" },// Set coordinates to an empty string.
   });
 
-  const onSuccess = (location) => {
-    setLocation({
-      loaded: true,
-      coordinates: {
+  const onSuccess = (location) => {// Add location as a parameter to the onSuccess function to handle the location data from the geolocation API.
+    setLocation({// Set the location state with the loaded location data.
+      loaded: true,// Set loaded to true after the location data is loaded.
+      coordinates: {// Set the coordinates with the latitude and longitude data from the location object.
         lat: location.coords.latitude,
         lng: location.coords.longitude,
       },
     });
   };
 
-  const fetchWeatherViaLocation = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&appid=${API_KEY}`
+  const fetchWeatherViaLocation = async () => {// Add fetchWeatherViaLocation function to fetch weather data based on the user's current location.
+    try {// Try to fetch weather data based on the user's current location.
+      const response = await axios.get(// Fetch weather data from the API based on the user's current location using axios and the OpenWeatherMap API.
+        `https://api.openweathermap.org/data/2.5/weather?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&appid=${process.env.REACT_APP_API_KEY}`
       );
-      fetchWeather(response.data.name);
-      setCity(response.data.name);
-      setFound(true);
+      fetchWeather(response.data.name);// Fetch weather data based on the city name received from the API response.
+      setCity(response.data.name);// Set the city state with the city name received from the API response.
+      setFound(true);// Set the found state to true to indicate that the city was found.
     } catch {
-      setFound(false);
+      setFound(false);// Set the found state to false to indicate that the city was not found.
     }
   };
 
-  const onError = (error) => {
+  const onError = (error) => {// Add error as a parameter to the onError function to handle errors from the geolocation API.
     setLocation({
-      loaded: true,
-      error,
+      loaded: true,// Set loaded to true even if an error occurs to avoid infinite loading.
+      error,// Set the error state with the error message received from the geolocation API.
     });
   };
 
-  useEffect(() => {
-    if (!("geolocation" in navigator)) {
-      onError({ code: 0, message: "Geolocation not supported" });
+  useEffect(() => {// Use the useEffect hook to load the user's location when the component mounts.
+    if (!("geolocation" in navigator)) {// Check if geolocation is supported by the browser.
+      onError({ code: 0, message: "Geolocation not supported" });// Handle the case where geolocation is not supported by setting an error message.
     }
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-  }, []);
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);// Get the user's current location using the geolocation API.
+  }, []);// Add an empty dependency array to ensure that the effect runs only once when the component mounts.
 
+  // Return the button component with the map marker icon and text.
   return (
     <>
       <StyledButton
@@ -63,7 +60,7 @@ const CurrentLocation = ({ setCity, setFound, fetchWeather, darkMode }) => {
   );
 };
 
-export default CurrentLocation;
+export default CurrentLocation;// Export the CurrentLocation component.
 
 const StyledButton = styled.button`
   padding: 12px 20px; /* Increased padding */

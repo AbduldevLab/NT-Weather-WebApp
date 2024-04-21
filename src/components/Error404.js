@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { FaExclamationCircle } from "react-icons/fa";
 
-const Error404 = (props) => {
-  const { setApierror, BackClick, darkMode } = props;
+const Error404 = (props) => {// Add props as a parameter
+  const { setApierror, BackClick, darkMode } = props;// structure setApierror, BackClick, and darkMode from props
 
   // Function to handle going back to the dashboard and setting apiError to false
   const handleBackToDashboard = () => {
@@ -13,6 +13,7 @@ const Error404 = (props) => {
     alert("Format:\nCity, Country Code, E.g. dublin, ie \n(Not case sensitive)");
   };
 
+  // Return the error message component
   return (
     <Container>
       <MessageContainer>
@@ -30,9 +31,9 @@ const Error404 = (props) => {
   );
 };
 
-export default Error404;
+export default Error404;// Export the Error404 component
 
-const Container = styled.div``;
+const Container = styled.div``;// Add a styled Container component
 
 const MessageContainer = styled.div`
   display: flex;
@@ -67,7 +68,7 @@ const BackToDashboardButton = styled.button`
   }
 `;
 
-const NoResultIcon = styled(FaExclamationCircle)`
+const NoResultIcon = styled(FaExclamationCircle)`// Add a styled NoResultIcon component
   color: red;
   font-size: 40px;
 `;

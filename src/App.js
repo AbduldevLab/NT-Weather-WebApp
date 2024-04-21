@@ -7,71 +7,77 @@ import CurrentLocation from "./components/CurrentLocation";
 import Error404 from "./components/Error404";
 import WeatherInfo from "./components/WeatherInfo";
 
-
+// Main App component
 function App() {
-  const [city, setCity] = useState("");
-  const [weather, setWeather] = useState("");
-  const [forecast, setForecast] = useState("");
-  const [found, setFound] = useState(false);
-  const [apierror, setApierror] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [city, setCity] = useState("");// State for city name
+  const [weather, setWeather] = useState("");// State for weather data
+  const [forecast, setForecast] = useState("");// State for forecast data
+  const [found, setFound] = useState(false);// State for found data
+  const [apierror, setApierror] = useState(false);// State for API error handling
+  const [loading, setLoading] = useState(false);// State for loading
   const [darkMode, setDarkMode] = useState(false); // State for dark mode
 
+  // Function to toggle dark mode
   const toggleDarkMode = () => {
-    setDarkMode((prevMode) => !prevMode);
+    setDarkMode((prevMode) => !prevMode);// Toggle dark mode state value when the button is clicked.
   };
 
+  // Function to fetch weather data from the API based on the city name entered by the user in the search box.
   const fetchWeather = async (CurrCity) => {
-    if (!CurrCity) {
-      // If the search box is empty, show an error message
-      alert("Please enter a value");
+    if (!CurrCity) {// If the search box is empty, show an error message
+      alert("Please enter a value");// Show an alert message
       return;
     }
   
-    setLoading(true);
+    setLoading(true);// Set loading to true when the API call is in progress to show a loading spinner.
     try {
-      const weatherResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${CurrCity}&appid=${process.env.REACT_APP_API_KEY}`
+      const weatherResponse = await axios.get(// Fetch weather data from the API based on the city name entered by the user.
+        `https://api.openweathermap.org/data/2.5/weather?q=${CurrCity}&appid=${process.env.REACT_APP_API_KEY}`// API URL with the city name and API key
       );
-      const forecastResponse = await axios.get(
+      const forecastResponse = await axios.get(// Fetch forecast data from the API based on the city name entered by the user.(3hrs 5 day forecast)
         `https://api.openweathermap.org/data/2.5/forecast?q=${CurrCity}&appid=${process.env.REACT_APP_API_KEY}`
       );
-      setWeather(weatherResponse.data);
+      setWeather(weatherResponse.data);// Set the weather data to the state variable.
       //console.log(weatherResponse.data);
+      // Set the forecast data to the state variable. Note hoe its .list, default openweather api returns 40 items as a list array for 5 days forecast with 3 hours interval.
       setForecast(forecastResponse.data.list);
       //console.log(forecastResponse.data);
-      setFound(true);
-      setApierror(false);
-    } catch {
+      setFound(true);// Set found to true if the data is found.
+      setApierror(false);// Set apierror to false if the data is found.
+    } catch {// If an error occurs during the API call, set apierror to true and found to false.
       setApierror(true);
       setFound(false);
     }
-    setLoading(false);
+    setLoading(false);// Set loading to false after the API call is completed.
   };
   
 
+  // Return the JSX for the App component with the necessary props and components.
   return (
-    <Container darkMode={darkMode}>
+    <Container darkMode={darkMode}> 
       <Header>
+      {/* Pass darkMode to the Container component */}
         <AppLabel darkMode={darkMode}>
           Northern Trust Forecast
+          {/* ToggleDarkModeButton component with onClick event handler */}
           <ToggleDarkModeButton onClick={toggleDarkMode}>
             {/* Apply circular border directly to the icons */}
             {darkMode ? <SunIconCircle /> : <MoonIconCircle />}
           </ToggleDarkModeButton>
         </AppLabel>
       </Header>
-      {weather && found ? (
+      {/* If weather data is found, render the WeatherInfo component with the weather data, forecast data, and other props. */}
+      {weather && found ? ( 
         <WeatherInfo
           weather={weather}
           forecast={forecast}
           setFound={setFound}
-          BackClick={() => {
+          BackClick={() => {// Function to clear the city name when the back button is clicked.
             setCity("");
           }}
           darkMode={darkMode} // Pass darkMode to WeatherInfo component
         />
-      ) : apierror && city.length > 0 ? (
+      ) : apierror && city.length > 0 ? (// If an API error occurs and the city name is not empty, render the Error404 component.
         <Error404
           setApierror={setApierror}
           BackClick={() => {
@@ -81,6 +87,7 @@ function App() {
         />
       ) : (
         <>
+        {/* If the weather data is not found, render the CityComponent and CurrentLocation components with the necessary props. */}
           <CityComponent
             setCity={(e) => {
               setCity(e);
@@ -103,9 +110,9 @@ function App() {
     </Container>
   );
 }
-export default App;
+export default App;// Export the App component for use in other files.
 
-
+// Styled components for the App component
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -133,7 +140,7 @@ const Container = styled.div`
   }
 `;
 
-
+// Styled components for the Header, AppLabel, ToggleDarkModeButton, SunIconCircle, MoonIconCircle, and Alternative components
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -160,22 +167,22 @@ const ToggleDarkModeButton = styled.button`
   outline: none;
   margin-left: auto; /* Move the button to the right */
 `;
-// Styled components for sun and moon icons with circular border
+
 const SunIconCircle = styled(IoSunny)`
   color: orange;
-  border: 2px solid orange; /* Circle border */
-  border-radius: 50%; /* Make it circular */
-  padding: 5px; /* Padding around the icon */
+  border: 2px solid orange;
+  border-radius: 50%; 
+  padding: 5px; 
 `;
 
 const MoonIconCircle = styled(IoMoon)`
   color: black;
-  border: 2px solid black; /* Circle border */
-  border-radius: 50%; /* Make it circular */
-  padding: 5px; /* Padding around the icon */
+  border: 2px solid black; 
+  border-radius: 50%; 
+  padding: 5px; 
 `;
 
 const Alternative = styled.div`
-  color: ${(props) => (props.darkMode ? "white" : "black")}; // Adjust text color based on dark mode
+  color: ${(props) => (props.darkMode ? "white" : "black")};
   margin-bottom: 10px;
 `;
