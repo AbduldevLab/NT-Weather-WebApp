@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import WeatherInfoComponent from "./WeatherInfoComponent";
-import { ImLocation2 } from "react-icons/im";
-import { FiChevronLeft } from "react-icons/fi";
+import React, { useState } from "react";// Import useState hook
+import styled from "styled-components";// Import styled-components
+import WeatherInfoComponent from "./WeatherInfoComponent";// Import WeatherInfoComponent
+import { ImLocation2 } from "react-icons/im";// Import location icon
+import { FiChevronLeft } from "react-icons/fi";// Import back icon
 
 // Import weather icons
 import {
@@ -20,18 +20,22 @@ import {
   WiNightFog
 } from "react-icons/wi";
 
+// WeatherInfo component
 const WeatherInfo = ({ weather, setFound, BackClick, darkMode }) => {
-  const [isCelsius, setIsCelsius] = useState(true);
+  const [isCelsius, setIsCelsius] = useState(true);// Create a state variable isCelsius and set it to true
 
+  // Function to toggle the temperature measurement
   const toggleMeasurement = () => {
     setIsCelsius(!isCelsius);
   };
 
+  // Function to convert temperature
   const convertTemperature = (temp) => {
-    const temperature = isCelsius ? Math.floor(temp - 273) : Math.floor((temp - 273) * (9 / 5) + 32);
+    const temperature = isCelsius ? Math.floor(temp - 273) : Math.floor((temp - 273) * (9 / 5) + 32);// Convert temperature based on the measurement
     return `${temperature}°${isCelsius ? "C" : "F"}`;
   };
 
+  // Function to get weather icon
   const getWeatherIcon = (icon) => {
     const weatherIcons = {
       "01d": <WiDaySunny />,
@@ -54,24 +58,26 @@ const WeatherInfo = ({ weather, setFound, BackClick, darkMode }) => {
       "50n": <WiNightFog />,
     };
 
-    return weatherIcons[icon] || null;
+    return weatherIcons[icon] || null;// Return the weather icon based on the icon code or null
   };
 
   return (
+    // Render the weather information
     <Container>
-      <Back onClick={() => {
+      <Back onClick={() => {// Add onClick event to the Back button
         setFound(false);
         BackClick();
       }}>
         <ArrowIcon />
       </Back>
-      {weather && (
+      {weather && (// Check if weather data is available
         <>
           <WeatherCondition>
+            {/* Display weather information*/}
             <WeatherIcon>
               {getWeatherIcon(weather.weather[0].icon)}
             </WeatherIcon>
-            <Temperature>{convertTemperature(weather.main.temp)}</Temperature>
+            <Temperature>{convertTemperature(weather.main.temp)}</Temperature>()
             <Condition>{weather.weather[0].description}</Condition>
             <Location>
               <ImLocation2 /> {`${weather.name}, ${weather.sys.country}`}
@@ -82,8 +88,8 @@ const WeatherInfo = ({ weather, setFound, BackClick, darkMode }) => {
             <WeatherInfoComponent name="Humidity" value={`${weather.main.humidity}%`} />
             <WeatherInfoComponent name="Wind Speed" value={`${weather.wind.speed}`} />
             <WeatherInfoComponent name="Pressure" value={`${weather.main.pressure}`} />
-            <WeatherInfoComponent name="Sunrise" value={`${new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}`} />
-            <WeatherInfoComponent name="Sunset" value={`${new Date(weather.sys.sunset * 1000).toLocaleTimeString()}`} />
+            <WeatherInfoComponent name="Sunrise" value={`${new Date((weather.sys.sunrise + weather.timezone) * 1000).toLocaleTimeString()}`} />
+            <WeatherInfoComponent name="Sunset" value={`${new Date((weather.sys.sunset + weather.timezone) * 1000).toLocaleTimeString()}`} />
             <WeatherInfoComponent name="Timezone" value={`${weather.timezone}`} />
             <WeatherInfoComponent name="Last Update" value={`${new Date(weather.dt * 1000).toLocaleString()}`} />
           </WeatherInfoContainer>
