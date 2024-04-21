@@ -8,30 +8,29 @@
 
 - Accesses Open Weather API for weather data
 - Modern  UI/UX
+- 3hrs 5 day weather updates
 - Weather icons
 - React icons
 - HTTP location request
-- auto complete location by Google 
+- Axios 
 - Dark/Light mode feature
-- City photos by unsplash
-- Temperature Conversion/celsius or fahrenheit/.
+- Temperature Conversion celsius/fahrenheit.
 - Responsive
+- Geolocation
+- Http request calls
 
 ### Technologies Used:
 
 ---
 
 1. React js
-3. ReactStrap
-4. CSS
-5. Bootstrap
+2. Axios
+3. Styles
+4. Github-pages
+5. React spinners(bootsrap integrated)
 6. RemixIcon/flaticon
-7. React-router-dom
-8. React-google-charts
-9. React-icons
-12. boxicons
-13. Jest
-15. React sitemapping
+7. React-icons
+8. Jest
 
 ### Live domain link:
 
