@@ -57,7 +57,8 @@ function App() {
         <AppLabel darkMode={darkMode}>
           Northern Trust Forecast
           <ToggleDarkModeButton onClick={toggleDarkMode}>
-            {darkMode ? <SunIcon /> : <MoonIcon />}
+            {/* Apply circular border directly to the icons */}
+            {darkMode ? <SunIconCircle /> : <MoonIconCircle />}
           </ToggleDarkModeButton>
         </AppLabel>
       </Header>
@@ -158,7 +159,20 @@ const ToggleDarkModeButton = styled.button`
   outline: none;
   margin-left: 5px; /* Add margin to separate from the label */
 `;
+// Styled components for sun and moon icons with circular border
+const SunIconCircle = styled(IoSunny)`
+  color: orange;
+  border: 2px solid orange; /* Circle border */
+  border-radius: 50%; /* Make it circular */
+  padding: 5px; /* Padding around the icon */
+`;
 
+const MoonIconCircle = styled(IoMoon)`
+  color: black;
+  border: 2px solid black; /* Circle border */
+  border-radius: 50%; /* Make it circular */
+  padding: 5px; /* Padding around the icon */
+`;
 const MoonIcon = styled(IoMoon)`
   color: black;
 `;
