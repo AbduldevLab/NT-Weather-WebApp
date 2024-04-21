@@ -9,6 +9,8 @@ const Error404 = (props) => {
   const handleBackToDashboard = () => {
     setApierror(false);
     BackClick();
+    // Display format message in an alert
+    alert("Format:\nCity, Country Code, E.g. dublin, ie \n(Not case sensitive)");
   };
 
   return (
@@ -18,11 +20,7 @@ const Error404 = (props) => {
           <NoResultIcon />
         </IconContainer>
         <ErrorMessage>Location not found! </ErrorMessage>
-        <FormatMessage>
-          Format: City, Country Code
-          <br />
-          (Not case sensitive)
-        </FormatMessage>
+        {/* Remove the FormatMessage component */}
         {/* Ensure darkMode prop is passed correctly */}
         <BackToDashboardButton darkMode={darkMode} onClick={handleBackToDashboard}>
           Back to Dashboard
@@ -52,12 +50,6 @@ const ErrorMessage = styled.div`
   color: red;
   font-size: 20px;
 `;
-const FormatMessage = styled.div`
-  padding-bottom: 10px; /* Add padding to bottom */
-  font-size: 12px;
-  color: red; /* Adjusted color */
-  text-align: center; /* Center align text */
-`;
 
 const BackToDashboardButton = styled.button`
   padding: 10px 20px;
@@ -74,7 +66,6 @@ const BackToDashboardButton = styled.button`
     background-color: #666; /* Hardcoded dark mode hover background color */
   }
 `;
-
 
 const NoResultIcon = styled(FaExclamationCircle)`
   color: red;

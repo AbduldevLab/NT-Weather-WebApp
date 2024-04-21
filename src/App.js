@@ -23,34 +23,39 @@ function App() {
   };
 
   const fetchWeather = async (CurrCity) => {
-    if (CurrCity) {
-      setLoading(true);
-      try {
-        const weatherResponse = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${CurrCity}&appid=${API_KEY}`
-        );
-        const forecastResponse = await axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${CurrCity}&appid=${API_KEY}`
-        );
-        setWeather(weatherResponse.data);
-        console.log(weatherResponse.data);
-        setForecast(forecastResponse.data.list);
-        console.log(forecastResponse.data);
-        setFound(true);
-        setApierror(false);
-      } catch {
-        setApierror(true);
-        setFound(false);
-      }
-      setLoading(false);
+    if (!CurrCity) {
+      // If the search box is empty, show an error message
+      alert("Please enter a value");
+      return;
     }
+  
+    setLoading(true);
+    try {
+      const weatherResponse = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${CurrCity}&appid=${API_KEY}`
+      );
+      const forecastResponse = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${CurrCity}&appid=${API_KEY}`
+      );
+      setWeather(weatherResponse.data);
+      //console.log(weatherResponse.data);
+      setForecast(forecastResponse.data.list);
+      //console.log(forecastResponse.data);
+      setFound(true);
+      setApierror(false);
+    } catch {
+      setApierror(true);
+      setFound(false);
+    }
+    setLoading(false);
   };
+  
 
   return (
     <Container darkMode={darkMode}>
       <Header>
         <AppLabel darkMode={darkMode}>
-          Northern Trust forecast
+          Northern Trust Forecast
           <ToggleDarkModeButton onClick={toggleDarkMode}>
             {darkMode ? <SunIcon /> : <MoonIcon />}
           </ToggleDarkModeButton>
