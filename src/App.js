@@ -95,7 +95,7 @@ export default App;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 50px auto 10; /* Adjusted margin-top to move the container above the center */
+  margin: 100px auto 200px; /* Adjusted margin-top to move the container above the center */
   align-items: center;
   box-shadow: 0 3px 6px 0 #555;
   padding: 20px 20px;
