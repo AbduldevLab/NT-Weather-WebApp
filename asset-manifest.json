@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/NT-Weather-WebApp/static/css/main.67d39580.css",
-    "main.js": "/NT-Weather-WebApp/static/js/main.895a12ff.js",
+    "main.js": "/NT-Weather-WebApp/static/js/main.fe1fa973.js",
     "static/media/view-3d-cloud.jpg": "/NT-Weather-WebApp/static/media/view-3d-cloud.79ea057ea1db0e2c2bff.jpg",
     "static/media/weather-news.png": "/NT-Weather-WebApp/static/media/weather-news.da0554ef771bcddd78e3.png",
     "index.html": "/NT-Weather-WebApp/index.html",
     "main.67d39580.css.map": "/NT-Weather-WebApp/static/css/main.67d39580.css.map",
-    "main.895a12ff.js.map": "/NT-Weather-WebApp/static/js/main.895a12ff.js.map"
+    "main.fe1fa973.js.map": "/NT-Weather-WebApp/static/js/main.fe1fa973.js.map"
   },
   "entrypoints": [
     "static/css/main.67d39580.css",
-    "static/js/main.895a12ff.js"
+    "static/js/main.fe1fa973.js"
   ]
 }
