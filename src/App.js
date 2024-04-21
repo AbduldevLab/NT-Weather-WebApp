@@ -148,6 +148,8 @@ const AppLabel = styled.span`
   color: ${(props) => (props.darkMode ? "white" : "black")}; // Adjust text color based on dark mode
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 `;
 
 const ToggleDarkModeButton = styled.button`
@@ -157,7 +159,7 @@ const ToggleDarkModeButton = styled.button`
   color: inherit;
   font-size: 20px; /* Increase font size */
   outline: none;
-  margin-left: 5px; /* Add margin to separate from the label */
+  margin-left: auto; /* Move the button to the right */
 `;
 // Styled components for sun and moon icons with circular border
 const SunIconCircle = styled(IoSunny)`
@@ -173,16 +175,8 @@ const MoonIconCircle = styled(IoMoon)`
   border-radius: 50%; /* Make it circular */
   padding: 5px; /* Padding around the icon */
 `;
-const MoonIcon = styled(IoMoon)`
-  color: black;
-`;
-
-const SunIcon = styled(IoSunny)`
-  color: orange;
-`;
 
 const Alternative = styled.div`
   color: ${(props) => (props.darkMode ? "white" : "black")}; // Adjust text color based on dark mode
   margin-bottom: 10px;
 `;
-
