@@ -17,7 +17,7 @@ import { render, screen, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Error404 from  "./components/Error404";
 
-afterEach(() => {//Thus
+afterEach(() => {
   cleanup();
 })
 
