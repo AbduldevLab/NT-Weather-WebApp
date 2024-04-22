@@ -3,6 +3,8 @@ import styled from "styled-components";
 import axios from "axios";
 import { FaMapMarkerAlt } from "react-icons/fa"; // Import map marker icon
 
+const secret_key = process.env.REACT_APP_API_KEY;
+
 const CurrentLocation = ({ setCity, setFound, fetchWeather, darkMode }) => {// Add setCity, setFound, fetchWeather, and darkMode as parameters
   const [location, setLocation] = useState({// Set location state
     loaded: false,// Set loaded to false in order to load the location data from the browser geolocation API when the component mounts.
@@ -22,7 +24,7 @@ const CurrentLocation = ({ setCity, setFound, fetchWeather, darkMode }) => {// A
   const fetchWeatherViaLocation = async () => {// Add fetchWeatherViaLocation function to fetch weather data based on the user's current location.
     try {// Try to fetch weather data based on the user's current location.
       const response = await axios.get(// Fetch weather data from the API based on the user's current location using axios and the OpenWeatherMap API.
-        `https://api.openweathermap.org/data/2.5/weather?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&appid=${process.env.REACT_APP_API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&appid=${secret_key}`
       );
       fetchWeather(response.data.name);// Fetch weather data based on the city name received from the API response.
       setCity(response.data.name);// Set the city state with the city name received from the API response.
