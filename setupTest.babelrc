@@ -1,0 +1,5 @@
+//This file is used to tell babel how to transpile our code to ES5 so that it can be run in the browser without any issues.
+{
+    "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+  
