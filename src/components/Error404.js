@@ -20,7 +20,7 @@ const Error404 = (props) => {// Add props as a parameter
         <IconContainer>
           <NoResultIcon />
         </IconContainer>
-        <ErrorMessage>Location not found! </ErrorMessage>
+        <ErrorMessage data-testid="error-message">Location not found! </ErrorMessage>
         {/* Remove the FormatMessage component */}
         {/* Ensure darkMode prop is passed correctly */}
         <BackToDashboardButton darkMode={darkMode} onClick={handleBackToDashboard}>
