@@ -6,7 +6,9 @@ import CityComponent from "./components/CityComponent";
 import CurrentLocation from "./components/CurrentLocation";
 import Error404 from "./components/Error404";
 import WeatherInfo from "./components/WeatherInfo";
+//require('dotenv').config()
 
+const secret_key = process.env.REACT_APP_API_KEY;
 // Main App component
 function App() {
   const [city, setCity] = useState("");// State for city name
@@ -32,10 +34,10 @@ function App() {
     setLoading(true);// Set loading to true when the API call is in progress to show a loading spinner.
     try {
       const weatherResponse = await axios.get(// Fetch weather data from the API based on the city name entered by the user.
-        `https://api.openweathermap.org/data/2.5/weather?q=${CurrCity}&appid=${process.env.REACT_APP_API_KEY}`// API URL with the city name and API key
+        `https://api.openweathermap.org/data/2.5/weather?q=${CurrCity}&appid=${secret_key}`// API URL with the city name and API key
       );
       const forecastResponse = await axios.get(// Fetch forecast data from the API based on the city name entered by the user.(3hrs 5 day forecast)
-        `https://api.openweathermap.org/data/2.5/forecast?q=${CurrCity}&appid=${process.env.REACT_APP_API_KEY}`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${CurrCity}&appid=${secret_key}`
       );
       setWeather(weatherResponse.data);// Set the weather data to the state variable.
       //console.log(weatherResponse.data);
