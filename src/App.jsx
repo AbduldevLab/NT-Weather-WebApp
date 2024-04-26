@@ -101,7 +101,8 @@ function App() {
           />
         </>
       )}
-      <Footer darkMode={darkMode}>@2024 Abdul_dev. All rights reserved</Footer>
+      <Footer darkMode={darkMode}> <span class="text-white">&copy; 2024 All rights reserved - </span>
+        <a>Abdul@devLab.</a></Footer>
     </Container>
   );
 }
