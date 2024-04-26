@@ -32,6 +32,7 @@
 7. React-icons
 8. Jest
 9. JSX
+10. VITE
 
 ### Live domain link:
 

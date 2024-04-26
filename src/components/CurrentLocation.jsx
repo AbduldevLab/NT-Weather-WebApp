@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { FaMapMarkerAlt } from "react-icons/fa"; // Import map marker icon
 
-const secret_key = process.env.REACT_APP_API_KEY;// secret key constant that holds the api key
+const secret_key = import.meta.env.VITE_APP_API_KEY;// secret key constant that holds the api key
 
 const CurrentLocation = ({ setCity, setFound, fetchWeather, darkMode }) => {// Add setCity, setFound, fetchWeather, and darkMode as parameters
   const [location, setLocation] = useState({// Set location state
