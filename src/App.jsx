@@ -59,7 +59,7 @@ function App() {
   return (
     <Container darkMode={darkMode}>
       <Header>
-        <AppLabel darkMode={darkMode}>Northern Trust Forecast</AppLabel>
+        <AppLabel darkMode={darkMode}>Weather Forecast</AppLabel>
         <Toggle handleChange={handleToggleChange} isChecked={darkMode} darkMode={darkMode} />
       </Header>
       {weather && found ? (
@@ -101,6 +101,7 @@ function App() {
           />
         </>
       )}
+      <Footer darkMode={darkMode}>@2024 Abdul_dev. All rights reserved</Footer>
     </Container>
   );
 }
@@ -156,4 +157,11 @@ const Alternative = styled.div`
   color: ${(props) => (props.darkMode ? "white" : "black")};
   margin-bottom: 10px;
 `;
+const Footer = styled.footer`
+  margin-top: 20px;
+  font-size: 14px;
+  color: ${(props) => (props.darkMode ? "white" : "black")};
+`;
+
+
 
