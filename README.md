@@ -40,7 +40,7 @@
 
 Visit the deployed website.
 
-https://abdulhaouit.github.io/NT-Weather-WebApp/
+https://Abdul@devLab.github.io/NT-Weather-WebApp/
 
 ### Copyright and License:
 
